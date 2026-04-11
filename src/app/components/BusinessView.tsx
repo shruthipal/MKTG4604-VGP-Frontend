@@ -180,19 +180,19 @@ export default function BusinessView() {
       >
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <div className="w-16 h-16 bg-gradient-to-br from-emerald-700 to-emerald-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <Building2 className="w-8 h-8" />
           </div>
-          <h2 className="mb-2 text-blue-600">I Have Surplus</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="mb-2 text-emerald-900 text-2xl font-bold">For Businesses</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Tell us what you have available. We'll connect you with organizations that need it most.
           </p>
         </div>
 
         {/* Example */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-          <p className="text-sm font-medium text-blue-900 mb-2">Example:</p>
-          <p className="text-sm text-blue-800">
+        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6">
+          <p className="text-sm font-medium text-emerald-900 mb-2">Example:</p>
+          <p className="text-sm text-emerald-800">
             "I'm Dunkin' and I have 500 extra doughnuts every day in Boston, MA."
           </p>
         </div>
@@ -200,10 +200,10 @@ export default function BusinessView() {
         {/* Chat Box */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
-            <MessageSquare className="w-5 h-5 text-blue-600" />
-            <h3 className="text-blue-900 font-semibold">Quick Input</h3>
+            <MessageSquare className="w-5 h-5 text-emerald-700" />
+            <h3 className="text-emerald-900 font-semibold">Quick Input</h3>
           </div>
-          <p className="text-sm text-muted-foreground mb-3">
+          <p className="text-sm text-gray-600 mb-3">
             Describe your surplus naturally and we'll extract the details
           </p>
           <div className="flex gap-2">
@@ -213,12 +213,12 @@ export default function BusinessView() {
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleChatSubmit()}
-              className="flex-1 px-4 py-3 bg-input-background border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-3 bg-white border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
             />
             <button
               onClick={handleChatSubmit}
               disabled={!chatInput.trim()}
-              className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              className="px-4 py-3 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
             >
               <Send className="w-5 h-5" />
             </button>
@@ -226,12 +226,12 @@ export default function BusinessView() {
         </div>
 
         {/* Form */}
-        <div className="bg-white border border-blue-100 rounded-lg p-6 mb-8 shadow-sm">
-          <h3 className="text-lg font-semibold text-blue-900 mb-4">Your Details</h3>
+        <div className="bg-white border border-emerald-100 rounded-lg p-6 mb-8 shadow-sm">
+          <h3 className="text-lg font-semibold text-emerald-900 mb-4">Your Details</h3>
           <div className="space-y-4">
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-700">
-                <Building2 className="w-4 h-4 inline mr-2 text-blue-600" />
+                <Building2 className="w-4 h-4 inline mr-2 text-emerald-700" />
                 Organization Name
               </label>
               <input
@@ -239,14 +239,14 @@ export default function BusinessView() {
                 placeholder="e.g., ABC Corp, Local Bakery"
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <Package className="w-4 h-4 inline mr-2 text-blue-600" />
+                  <Package className="w-4 h-4 inline mr-2 text-emerald-700" />
                   Item Available
                 </label>
                 <input
@@ -254,7 +254,7 @@ export default function BusinessView() {
                   placeholder="e.g., doughnuts, laptops, clothing"
                   value={inventory}
                   onChange={(e) => setInventory(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
                 />
               </div>
               <div>
@@ -266,7 +266,7 @@ export default function BusinessView() {
                   placeholder="e.g., 500 daily, 1000 units"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
                 />
               </div>
             </div>
@@ -274,7 +274,7 @@ export default function BusinessView() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <MapPin className="w-4 h-4 inline mr-2 text-blue-600" />
+                  <MapPin className="w-4 h-4 inline mr-2 text-emerald-700" />
                   Location
                 </label>
                 <input
@@ -282,13 +282,13 @@ export default function BusinessView() {
                   placeholder="e.g., Boston, MA"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
                 />
               </div>
 
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <DollarSign className="w-4 h-4 inline mr-2 text-blue-600" />
+                  <DollarSign className="w-4 h-4 inline mr-2 text-emerald-700" />
                   Estimated Value (optional)
                 </label>
                 <input
@@ -296,7 +296,7 @@ export default function BusinessView() {
                   placeholder="e.g., $5,000"
                   value={estimatedValue}
                   onChange={(e) => setEstimatedValue(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
                 />
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function BusinessView() {
               <button
                 onClick={handleFindMatches}
                 disabled={!inventory.trim()}
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium"
               >
                 <Search className="w-5 h-5" />
                 Find Matches
@@ -330,16 +330,16 @@ export default function BusinessView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <h3 className="mb-2 text-blue-900 font-semibold">
+            <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+              <h3 className="mb-2 text-emerald-900 font-semibold">
                 {matches.length > 0 ? "Matching Recipients" : "No Matches Found"}
               </h3>
               {matches.length > 0 ? (
-                <p className="text-sm text-blue-800">
+                <p className="text-sm text-emerald-800">
                   Found {matches.length} {matches.length === 1 ? "organization" : "organizations"} that can use {inventory}
                 </p>
               ) : (
-                <p className="text-sm text-blue-800">
+                <p className="text-sm text-emerald-800">
                   Try different items like "food", "electronics", "clothing", or "furniture".
                 </p>
               )}

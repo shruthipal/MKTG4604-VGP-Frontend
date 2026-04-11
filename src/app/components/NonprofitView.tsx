@@ -182,19 +182,19 @@ export default function NonprofitView() {
       >
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <div className="w-16 h-16 bg-gradient-to-br from-teal-600 to-cyan-400 text-white rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <ShoppingCart className="w-8 h-8" />
           </div>
-          <h2 className="mb-2 text-green-600">I'm Looking</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="mb-2 text-teal-900 text-2xl font-bold">For Organizations in Need</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Tell us what you need. We'll connect you with organizations that have surplus available.
           </p>
         </div>
 
         {/* Example */}
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-          <p className="text-sm font-medium text-green-900 mb-2">Example:</p>
-          <p className="text-sm text-green-800">
+        <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-4 mb-6">
+          <p className="text-sm font-medium text-teal-900 mb-2">Example:</p>
+          <p className="text-sm text-teal-800">
             "I'm a food bank in Portland looking for donated food and produce."
           </p>
         </div>
@@ -202,10 +202,10 @@ export default function NonprofitView() {
         {/* Chat Box */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
-            <MessageSquare className="w-5 h-5 text-green-600" />
-            <h3 className="text-green-900 font-semibold">Quick Input</h3>
+            <MessageSquare className="w-5 h-5 text-teal-700" />
+            <h3 className="text-teal-900 font-semibold">Quick Input</h3>
           </div>
-          <p className="text-sm text-muted-foreground mb-3">
+          <p className="text-sm text-gray-600 mb-3">
             Describe what you need and we'll extract the details
           </p>
           <div className="flex gap-2">
@@ -215,12 +215,12 @@ export default function NonprofitView() {
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleChatSubmit()}
-              className="flex-1 px-4 py-3 bg-input-background border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="flex-1 px-4 py-3 bg-white border border-cyan-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
             />
             <button
               onClick={handleChatSubmit}
               disabled={!chatInput.trim()}
-              className="px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              className="px-4 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
             >
               <Send className="w-5 h-5" />
             </button>
@@ -228,12 +228,12 @@ export default function NonprofitView() {
         </div>
 
         {/* Form */}
-        <div className="bg-white border border-green-100 rounded-lg p-6 mb-8 shadow-sm">
-          <h3 className="text-lg font-semibold text-green-900 mb-4">Your Details</h3>
+        <div className="bg-white border border-cyan-100 rounded-lg p-6 mb-8 shadow-sm">
+          <h3 className="text-lg font-semibold text-teal-900 mb-4">Your Details</h3>
           <div className="space-y-4">
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-700">
-                <ShoppingCart className="w-4 h-4 inline mr-2 text-green-600" />
+                <ShoppingCart className="w-4 h-4 inline mr-2 text-teal-700" />
                 Organization Name
               </label>
               <input
@@ -241,14 +241,14 @@ export default function NonprofitView() {
                 placeholder="e.g., Local Food Bank, Tech Resale"
                 value={nonprofitName}
                 onChange={(e) => setNonprofitName(e.target.value)}
-                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <Package className="w-4 h-4 inline mr-2 text-green-600" />
+                  <Package className="w-4 h-4 inline mr-2 text-teal-700" />
                   What Do You Need?
                 </label>
                 <input
@@ -256,7 +256,7 @@ export default function NonprofitView() {
                   placeholder="e.g., food, computers, clothing"
                   value={goodsNeeded}
                   onChange={(e) => setGoodsNeeded(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 />
               </div>
               <div>
@@ -268,7 +268,7 @@ export default function NonprofitView() {
                   placeholder="e.g., 200 daily, 500 units"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 />
               </div>
             </div>
@@ -276,7 +276,7 @@ export default function NonprofitView() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <MapPin className="w-4 h-4 inline mr-2 text-green-600" />
+                  <MapPin className="w-4 h-4 inline mr-2 text-teal-700" />
                   Location
                 </label>
                 <input
@@ -284,7 +284,7 @@ export default function NonprofitView() {
                   placeholder="e.g., Portland, OR"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 />
               </div>
               <div>
@@ -296,7 +296,7 @@ export default function NonprofitView() {
                   placeholder="e.g., $5,000"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 />
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function NonprofitView() {
               <button
                 onClick={handleFindMatches}
                 disabled={!goodsNeeded.trim()}
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium"
               >
                 <Search className="w-5 h-5" />
                 Find Available
@@ -330,16 +330,16 @@ export default function NonprofitView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <h3 className="mb-2 text-green-900 font-semibold">
+            <div className="mb-6 p-4 bg-cyan-50 border border-cyan-200 rounded-lg">
+              <h3 className="mb-2 text-teal-900 font-semibold">
                 {matches.length > 0 ? "Available Sources" : "No Matches Found"}
               </h3>
               {matches.length > 0 ? (
-                <p className="text-sm text-green-800">
+                <p className="text-sm text-teal-800">
                   Found {matches.length} {matches.length === 1 ? "organization" : "organizations"} with available {goodsNeeded}
                 </p>
               ) : (
-                <p className="text-sm text-green-800">
+                <p className="text-sm text-teal-800">
                   Try different items like "food", "electronics", "clothing", or "furniture".
                 </p>
               )}

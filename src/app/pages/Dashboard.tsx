@@ -14,51 +14,51 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="border-b border-border bg-gradient-to-r from-blue-50 to-yellow-50"
+        className="border-b border-gray-200 bg-white shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-start gap-4 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-emerald-700 to-teal-600 text-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
               <Sparkles className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="mb-2 bg-gradient-to-r from-blue-600 to-yellow-500 bg-clip-text text-transparent">Surplus Connect</h1>
-              <p className="text-muted-foreground max-w-3xl">
-                Connect excess inventory with organizations in need. Simple, direct matching that creates real impact.
+              <h1 className="mb-2 text-3xl font-bold text-emerald-900">Surplus Connect</h1>
+              <p className="text-gray-600 max-w-3xl">
+                Smart marketplace connecting business surplus with organizations in need. Simple, direct matching that creates real impact.
               </p>
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 bg-white p-1 rounded-lg w-fit border border-gray-200 shadow-sm">
+          <div className="flex gap-2 bg-gray-100 p-1 rounded-lg w-fit border border-gray-200">
             <button
               onClick={() => setActiveTab("business")}
-              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all ${
+              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all font-medium ${
                 activeTab === "business"
-                  ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md"
-                  : "text-gray-600 hover:text-blue-600"
+                  ? "bg-emerald-700 text-white shadow-md"
+                  : "text-gray-600 hover:text-emerald-700 hover:bg-white"
               }`}
             >
               <Building2 className="w-4 h-4" />
-              <span>I Have Surplus</span>
+              <span>Businesses</span>
             </button>
             <button
               onClick={() => setActiveTab("buyer")}
-              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all ${
+              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all font-medium ${
                 activeTab === "buyer"
-                  ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md"
-                  : "text-gray-600 hover:text-green-600"
+                  ? "bg-teal-600 text-white shadow-md"
+                  : "text-gray-600 hover:text-teal-600 hover:bg-white"
               }`}
             >
               <ShoppingCart className="w-4 h-4" />
-              <span>I'm Looking</span>
+              <span>Organizations in Need</span>
             </button>
           </div>
         </div>
       </motion.header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-50 min-h-screen">
         {activeTab === "business" ? <BusinessView /> : <NonprofitView />}
       </main>
     </div>
