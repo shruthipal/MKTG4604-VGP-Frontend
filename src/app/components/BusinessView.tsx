@@ -14,7 +14,6 @@ export default function BusinessView() {
   const [matches, setMatches] = useState<Nonprofit[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
 
-  // Load from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem("businessFormData");
     if (saved) {
@@ -27,7 +26,6 @@ export default function BusinessView() {
     }
   }, []);
 
-  // Save to localStorage whenever form changes
   useEffect(() => {
     const formData = { companyName, inventory, location, estimatedValue, quantity };
     localStorage.setItem("businessFormData", JSON.stringify(formData));
@@ -38,7 +36,6 @@ export default function BusinessView() {
 
     const input = chatInput.toLowerCase();
 
-    // Extract company name
     const companyPatterns = [
       /i'?m\s+([a-zA-Z\s&]+?)(?:\s+and|,|\.|$)/i,
       /from\s+([a-zA-Z\s&]+?)(?:\s+and|,|\.|$)/i,
@@ -56,7 +53,6 @@ export default function BusinessView() {
       }
     }
 
-    // Extract quantity and inventory
     const quantityPatterns = [
       /(\d+[,\d]*)\s+(extra|excess)?\s*([a-zA-Z\s]+?)(?:\s+every\s+day|daily|per day|a day)/i,
       /(\d+[,\d]*)\s+([a-zA-Z\s]+?)(?:\s+in\s+stock|available)/i,
@@ -67,7 +63,7 @@ export default function BusinessView() {
       const match = input.match(pattern);
       if (match) {
         setQuantity(match[1]);
-        const itemIndex = match[2] && (match[2] === 'extra' || match[2] === 'excess') ? 3 : 2;
+        const itemIndex = match[2] && (match[2] === "extra" || match[2] === "excess") ? 3 : 2;
         if (match[itemIndex]) {
           setInventory(match[itemIndex].trim());
         }
@@ -75,7 +71,6 @@ export default function BusinessView() {
       }
     }
 
-    // If no quantity pattern matched, try to extract just the inventory
     if (!inventory) {
       const inventoryPatterns = [
         /(?:extra|excess|surplus)\s+([a-zA-Z\s,]+?)(?:\s+who|$)/i,
@@ -91,7 +86,6 @@ export default function BusinessView() {
       }
     }
 
-    // Extract location
     const locationPatterns = [
       /(?:in|from|at)\s+([A-Z][a-zA-Z\s]+,\s*[A-Z]{2})/,
       /(?:in|from|at)\s+([A-Z][a-zA-Z\s]+)/,
@@ -105,40 +99,39 @@ export default function BusinessView() {
       }
     }
 
-    // Extract value
     const valuePattern = /\$(\d+[,\d]*(?:\.\d+)?[kKmM]?)/;
     const valueMatch = chatInput.match(valuePattern);
     if (valueMatch) {
-      setEstimatedValue('$' + valueMatch[1]);
+      setEstimatedValue("$" + valueMatch[1]);
     }
 
     setChatInput("");
   };
 
   const handleFindMatches = () => {
-    // Matching logic based on inventory keywords
     const inventoryLower = inventory.toLowerCase();
     const locationLower = location.toLowerCase();
 
     const filtered = mockNonprofits.filter((nonprofit) => {
-      // Check if inventory matches any goods needed
       const hasInventoryMatch = nonprofit.goodsNeeded.some((good) => {
         const goodLower = good.toLowerCase();
-        return inventoryLower.includes(goodLower) ||
-               goodLower.includes(inventoryLower) ||
-               // Fuzzy matching for common terms
-               (inventoryLower.includes('food') && goodLower.includes('food')) ||
-               (inventoryLower.includes('computer') && (goodLower.includes('computer') || goodLower.includes('laptop') || goodLower.includes('electronics'))) ||
-               (inventoryLower.includes('laptop') && (goodLower.includes('laptop') || goodLower.includes('computer') || goodLower.includes('electronics'))) ||
-               (inventoryLower.includes('electronics') && goodLower.includes('electronics')) ||
-               (inventoryLower.includes('clothing') && goodLower.includes('clothing')) ||
-               (inventoryLower.includes('phone') && (goodLower.includes('phone') || goodLower.includes('smartphone')));
+        return (
+          inventoryLower.includes(goodLower) ||
+          goodLower.includes(inventoryLower) ||
+          (inventoryLower.includes("food") && goodLower.includes("food")) ||
+          (inventoryLower.includes("computer") &&
+            (goodLower.includes("computer") || goodLower.includes("laptop") || goodLower.includes("electronics"))) ||
+          (inventoryLower.includes("laptop") &&
+            (goodLower.includes("laptop") || goodLower.includes("computer") || goodLower.includes("electronics"))) ||
+          (inventoryLower.includes("electronics") && goodLower.includes("electronics")) ||
+          (inventoryLower.includes("clothing") && goodLower.includes("clothing")) ||
+          (inventoryLower.includes("phone") && (goodLower.includes("phone") || goodLower.includes("smartphone")))
+        );
       });
 
       return hasInventoryMatch;
     });
 
-    // Sort by location proximity (same city/state gets priority)
     const sorted = filtered.sort((a, b) => {
       const aLocation = a.location.toLowerCase();
       const bLocation = b.location.toLowerCase();
@@ -149,8 +142,12 @@ export default function BusinessView() {
         if (aExactMatch && !bExactMatch) return -1;
         if (!aExactMatch && bExactMatch) return 1;
 
-        const aSameState = locationLower.includes(',') && aLocation.split(',')[1]?.trim() === locationLower.split(',')[1]?.trim();
-        const bSameState = locationLower.includes(',') && bLocation.split(',')[1]?.trim() === locationLower.split(',')[1]?.trim();
+        const aSameState =
+          locationLower.includes(",") &&
+          aLocation.split(",")[1]?.trim() === locationLower.split(",")[1]?.trim();
+        const bSameState =
+          locationLower.includes(",") &&
+          bLocation.split(",")[1]?.trim() === locationLower.split(",")[1]?.trim();
         if (aSameState && !bSameState) return -1;
         if (!aSameState && bSameState) return 1;
       }
@@ -167,6 +164,7 @@ export default function BusinessView() {
     setInventory("");
     setLocation("");
     setEstimatedValue("");
+    setQuantity("");
     setMatches([]);
     setHasSearched(false);
   };
@@ -178,7 +176,6 @@ export default function BusinessView() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-[#E6F7F1] text-[#1F7A63] rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <Building2 className="w-8 h-8" />
@@ -189,7 +186,6 @@ export default function BusinessView() {
           </p>
         </div>
 
-        {/* Example */}
         <div className="bg-[#F2FBF7] border border-[#4CAF8E] rounded-lg p-4 mb-6">
           <p className="text-sm font-medium text-[#1F7A63] mb-2">Example:</p>
           <p className="text-sm text-[#1E293B]">
@@ -197,15 +193,12 @@ export default function BusinessView() {
           </p>
         </div>
 
-        {/* Chat Box */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
             <MessageSquare className="w-5 h-5 text-[#1F7A63]" />
             <h3 className="text-[#1E293B] font-semibold">Quick Input</h3>
           </div>
-          <p className="text-sm text-[#64748B] mb-3">
-            Describe your surplus
-          </p>
+          <p className="text-sm text-[#64748B] mb-3">Describe your surplus</p>
           <div className="flex gap-2">
             <input
               type="text"
@@ -225,7 +218,6 @@ export default function BusinessView() {
           </div>
         </div>
 
-        {/* Form */}
         <div className="bg-white border border-emerald-100 rounded-lg p-6 mb-8 shadow-sm">
           <h3 className="text-lg font-semibold text-[#1E293B] mb-4">Your Details</h3>
           <div className="space-y-4">
@@ -323,7 +315,6 @@ export default function BusinessView() {
           </div>
         </div>
 
-        {/* Results */}
         {hasSearched && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -336,7 +327,8 @@ export default function BusinessView() {
               </h3>
               {matches.length > 0 ? (
                 <p className="text-sm text-emerald-800">
-                  Found {matches.length} {matches.length === 1 ? "organization" : "organizations"} that can use {inventory}
+                  Found {matches.length} {matches.length === 1 ? "organization" : "organizations"} that can use{" "}
+                  {inventory}
                 </p>
               ) : (
                 <p className="text-sm text-emerald-800">

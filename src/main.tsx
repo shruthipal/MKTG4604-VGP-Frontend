@@ -1,27 +1,16 @@
+import { createRoot } from "react-dom/client";
+import App from "./app/App.tsx";
+import "./styles/index.css";
 
-  import { createRoot } from "react-dom/client";
-  import App from "./app/App.tsx";
-  import "./styles/index.css";
-
-// Handle GitHub Pages SPA routing
-// https://github.com/rafgraph/spa-github-pages
-// This script checks to see if a redirect is present in the query string,
-// converts it back to the correct url and adds it to the
-// browser's history using window.history.replaceState(...),
-// which won't cause the browser to attempt to load the new url.
-// When the single page app is loaded further down in this file,
-// the correct url will be waiting in the browser's history for
-// the single page app to route accordingly.
-(function(l) {
-  if (l.search[1] === '/' ) {
-    var decoded = l.search.slice(1).split('&').map(function(s) {
-      return s.replace(/~and~/g, '&')
-    }).join('?');
-    window.history.replaceState(null, null,
-        l.pathname.slice(0, -1) + decoded + l.hash
-    );
+(function (location) {
+  if (location.search[1] === "/") {
+    const decoded = location.search
+      .slice(1)
+      .split("&")
+      .map((s) => s.replace(/~and~/g, "&"))
+      .join("?");
+    window.history.replaceState(null, "", location.pathname.slice(0, -1) + decoded + location.hash);
   }
-}(window.location));
+})(window.location);
 
 createRoot(document.getElementById("root")!).render(<App />);
-  

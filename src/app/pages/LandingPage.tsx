@@ -14,7 +14,6 @@ export default function LandingPage({ onSelectRole }: LandingPageProps) {
         transition={{ duration: 0.6 }}
         className="text-center mb-10 max-w-2xl"
       >
-        {/* Logo */}
         <div className="w-16 h-16 bg-[#4CAF8E] text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
           <Sparkles className="w-8 h-8" />
         </div>

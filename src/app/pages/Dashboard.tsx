@@ -9,7 +9,6 @@ export default function Dashboard() {
   const [onboarded, setOnboarded] = useState(false);
   const [activeTab, setActiveTab] = useState<"business" | "buyer" | null>(null);
 
-  // Scroll to top when onboarding completes
   useEffect(() => {
     if (onboarded) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -20,8 +19,17 @@ export default function Dashboard() {
     setActiveTab(role);
     setOnboarded(true);
   };
+
+  const backgroundStyle = {
+    backgroundImage: "var(--background-image)",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "40% auto",
+    backgroundAttachment: "fixed",
+  };
+
   return (
-    <div className="min-h-screen bg-background" style={{ backgroundImage: 'var(--background-image)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: '40% auto', backgroundAttachment: 'fixed' }}>
+    <div className="min-h-screen bg-background" style={backgroundStyle}>
       {!onboarded ? (
         <LandingPage onSelectRole={handleSelectRole} />
       ) : (
