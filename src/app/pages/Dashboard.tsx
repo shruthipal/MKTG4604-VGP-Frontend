@@ -42,7 +42,7 @@ export default function Dashboard() {
                   <div>
                     <h1 className="mb-2 text-3xl font-bold text-[#1E293B]">Surplus Connect</h1>
                     <p className="text-[#64748B] max-w-3xl">
-                      Tell us what excess you have available, we will connect you with the best buyers based on your needs and Smart marketplace connecting business surplus with organizations in need. Simple, direct matching that creates real impact.
+                      Tell us what excess you have available, we will connect you with the best buyers based on your needs. Simple. Easy. Direct. 
                     </p>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ export default function Dashboard() {
                   }`}
                 >
                   <ShoppingCart className="w-4 h-4" />
-                  <span>I'm a Buyer</span>
+                  <span>Looking for Available Surplus Near Me</span>
                 </button>
               </div>
             </div>
