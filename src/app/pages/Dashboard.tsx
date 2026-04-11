@@ -72,8 +72,8 @@ export default function Dashboard() {
                   onClick={() => setActiveTab("buyer")}
                   className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all font-medium ${
                     activeTab === "buyer"
-                      ? "bg-[#F59E0B] text-white shadow-md"
-                      : "text-[#64748B] hover:text-[#F59E0B] hover:bg-white"
+                      ? "bg-[#4CAF8E] text-white shadow-md"
+                      : "text-[#64748B] hover:text-[#4CAF8E] hover:bg-white"
                   }`}
                 >
                   <ShoppingCart className="w-4 h-4" />

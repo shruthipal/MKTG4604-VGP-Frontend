@@ -40,7 +40,7 @@ export default function LandingPage({ onSelectRole }: LandingPageProps) {
           whileHover={{ scale: 1.05, y: -3 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onSelectRole("business")}
-          className="flex-1 bg-white border-2 border-[#4CAF8E] rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5 hover:border-[#1F7A63]"
+          className="flex-1 bg-white border-2 border-[#4CAF8E] rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5 hover:border-[#1F7A63] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#4CAF8E]/30"
         >
           <div className="w-14 h-14 bg-[#E6F7F1] text-[#1F7A63] rounded-lg flex items-center justify-center mx-auto mb-3 shadow-sm">
             <Building2 className="w-7 h-7" />
@@ -60,16 +60,16 @@ export default function LandingPage({ onSelectRole }: LandingPageProps) {
           whileHover={{ scale: 1.05, y: -3 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onSelectRole("buyer")}
-          className="flex-1 bg-white border-2 border-[#FCD34D] rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5 hover:border-[#F59E0B]"
+          className="flex-1 bg-white border-2 border-[#A8E5D5] rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5 hover:border-[#4CAF8E] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#4CAF8E]/30"
         >
-          <div className="w-14 h-14 bg-[#FFF4D6] text-[#F59E0B] rounded-lg flex items-center justify-center mx-auto mb-3 shadow-sm">
+          <div className="w-14 h-14 bg-[#E6F7F1] text-[#1F7A63] rounded-lg flex items-center justify-center mx-auto mb-3 shadow-sm">
             <ShoppingCart className="w-7 h-7" />
           </div>
-          <h2 className="text-xl font-bold text-[#F59E0B] mb-2">I'm a Buyer</h2>
+          <h2 className="text-xl font-bold text-[#1F7A63] mb-2">I'm a Buyer</h2>
           <p className="text-sm text-[#64748B] mb-4">
-            Looking for great prices? Find surplus inventory.
+            Looking for available surplus at competitive prices.
           </p>
-          <div className="flex items-center justify-center gap-2 text-[#F59E0B] font-semibold group text-sm">
+          <div className="flex items-center justify-center gap-2 text-[#4CAF8E] font-semibold group text-sm">
             Get Started
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </div>
