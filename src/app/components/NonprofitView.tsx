@@ -200,7 +200,7 @@ export default function NonprofitView() {
       >
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-[#FFF4D6] text-[#F59E0B] rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <div className="w-16 h-16 bg-[#E6F7F1] text-[#1F7A63] rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <ShoppingCart className="w-8 h-8" />
           </div>
           <h2 className="mb-2 text-[#1E293B] text-2xl font-bold">I'm a Buyer</h2>
@@ -210,9 +210,9 @@ export default function NonprofitView() {
         </div>
 
         {/* Example */}
-        <div className="bg-[#FFFBEB] border border-[#FCD34D] rounded-lg p-4 mb-6">
-          <p className="text-sm font-medium text-[#F59E0B] mb-2">Example:</p>
-          <p className="text-sm text-[#F59E0B]">
+        <div className="bg-[#F2FBF7] border border-[#4CAF8E] rounded-lg p-4 mb-6">
+          <p className="text-sm font-medium text-[#1F7A63] mb-2">Example:</p>
+          <p className="text-sm text-[#1E293B]">
             "I'm a food bank in Portland looking for donated food and produce."
           </p>
         </div>
@@ -220,10 +220,10 @@ export default function NonprofitView() {
         {/* Chat Box */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
-            <MessageSquare className="w-5 h-5 text-amber-700" />
-            <h3 className="text-amber-900 font-semibold">Quick Input</h3>
+            <MessageSquare className="w-5 h-5 text-[#1F7A63]" />
+            <h3 className="text-[#1E293B] font-semibold">Quick Input</h3>
           </div>
-          <p className="text-sm text-gray-600 mb-3">
+          <p className="text-sm text-[#64748B] mb-3">
             Describe what you need and we'll extract the details
           </p>
           <div className="flex gap-2">
@@ -233,12 +233,12 @@ export default function NonprofitView() {
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleChatSubmit()}
-              className="flex-1 px-4 py-3 bg-white border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600"
+              className="flex-1 px-4 py-3 bg-white border border-[#4CAF8E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E]"
             />
             <button
               onClick={handleChatSubmit}
               disabled={!chatInput.trim()}
-              className="px-4 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              className="px-4 py-3 bg-[#1F7A63] text-white rounded-lg hover:bg-[#16664E] transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
             >
               <Send className="w-5 h-5" />
             </button>
@@ -246,13 +246,13 @@ export default function NonprofitView() {
         </div>
 
         {/* Form */}
-        <div className="bg-white border border-amber-100 rounded-lg p-6 mb-8 shadow-sm">
-          <h3 className="text-lg font-semibold text-amber-900 mb-6">Your Details</h3>
+        <div className="bg-white border border-emerald-100 rounded-lg p-6 mb-8 shadow-sm">
+          <h3 className="text-lg font-semibold text-[#1E293B] mb-6">Your Details</h3>
           <div className="space-y-6">
             {/* Organization Name */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                <ShoppingCart className="w-4 h-4 inline mr-2 text-amber-700" />
+              <label className="block mb-2 text-sm font-medium text-[#1E293B]">
+                <ShoppingCart className="w-4 h-4 inline mr-2 text-[#1F7A63]" />
                 Organization Name
               </label>
               <input
@@ -260,15 +260,15 @@ export default function NonprofitView() {
                 placeholder="e.g., Local Food Bank, Tech Resale"
                 value={nonprofitName}
                 onChange={(e) => setNonprofitName(e.target.value)}
-                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
               />
             </div>
 
             {/* Goods Needed and Quantity */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <Package className="w-4 h-4 inline mr-2 text-amber-700" />
+                <label className="block mb-2 text-sm font-medium text-[#1E293B]">
+                  <Package className="w-4 h-4 inline mr-2 text-[#1F7A63]" />
                   What Do You Need?
                 </label>
                 <input
@@ -276,11 +276,11 @@ export default function NonprofitView() {
                   placeholder="e.g., food, computers, clothing"
                   value={goodsNeeded}
                   onChange={(e) => setGoodsNeeded(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                <label className="block mb-2 text-sm font-medium text-[#1E293B]">
                   Quantity (optional)
                 </label>
                 <input
@@ -288,7 +288,7 @@ export default function NonprofitView() {
                   placeholder="e.g., 200 daily, 500 units"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
                 />
               </div>
             </div>
@@ -296,8 +296,8 @@ export default function NonprofitView() {
             {/* Location and Purchasing Toggle */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <MapPin className="w-4 h-4 inline mr-2 text-amber-700" />
+                <label className="block mb-2 text-sm font-medium text-[#1E293B]">
+                  <MapPin className="w-4 h-4 inline mr-2 text-[#1F7A63]" />
                   Location
                 </label>
                 <input
@@ -305,12 +305,12 @@ export default function NonprofitView() {
                   placeholder="e.g., Portland, OR"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  <Tag className="w-4 h-4 inline mr-2 text-amber-700" />
+                <label className="block mb-2 text-sm font-medium text-[#1E293B]">
+                  <Tag className="w-4 h-4 inline mr-2 text-[#1F7A63]" />
                   Type of Purchase
                 </label>
                 <div className="flex gap-3">
@@ -318,7 +318,7 @@ export default function NonprofitView() {
                     onClick={() => setIsPurchasing(false)}
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all ${
                       !isPurchasing
-                        ? "bg-amber-600 text-white shadow-md"
+                        ? "bg-[#1F7A63] text-white shadow-md"
                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}
                   >
@@ -328,7 +328,7 @@ export default function NonprofitView() {
                     onClick={() => setIsPurchasing(true)}
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all ${
                       isPurchasing
-                        ? "bg-amber-600 text-white shadow-md"
+                        ? "bg-[#1F7A63] text-white shadow-md"
                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}
                   >
@@ -345,13 +345,13 @@ export default function NonprofitView() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-amber-50 border border-amber-200 rounded-lg p-4 space-y-4"
+                className="bg-[#F2FBF7] border border-[#4CAF8E] rounded-lg p-4 space-y-4"
               >
-                <p className="text-sm font-medium text-amber-900">Set your price range</p>
+                <p className="text-sm font-medium text-[#1F7A63]">Set your price range</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
-                      <DollarSign className="w-4 h-4 inline mr-2 text-amber-700" />
+                    <label className="block mb-2 text-sm font-medium text-[#1E293B]">
+                      <DollarSign className="w-4 h-4 inline mr-2 text-[#1F7A63]" />
                       Minimum Price
                     </label>
                     <input
@@ -359,13 +359,13 @@ export default function NonprofitView() {
                       placeholder="e.g., 100"
                       value={minPrice}
                       onChange={(e) => setMinPrice(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 bg-white border border-[#4CAF8E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
                       min="0"
                     />
                   </div>
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
-                      <DollarSign className="w-4 h-4 inline mr-2 text-amber-700" />
+                    <label className="block mb-2 text-sm font-medium text-[#1E293B]">
+                      <DollarSign className="w-4 h-4 inline mr-2 text-[#1F7A63]" />
                       Maximum Price
                     </label>
                     <input
@@ -373,7 +373,7 @@ export default function NonprofitView() {
                       placeholder="e.g., 5000"
                       value={maxPrice}
                       onChange={(e) => setMaxPrice(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 bg-white border border-[#4CAF8E] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
                       min="0"
                     />
                   </div>
@@ -384,7 +384,7 @@ export default function NonprofitView() {
             {/* Budget field - only show if not purchasing */}
             {!isPurchasing && (
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700">
+                <label className="block mb-2 text-sm font-medium text-[#1E293B]">
                   Budget (optional)
                 </label>
                 <input
@@ -392,7 +392,7 @@ export default function NonprofitView() {
                   placeholder="e.g., $5,000"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4CAF8E] focus:border-transparent transition-colors"
                 />
               </div>
             )}
@@ -401,7 +401,7 @@ export default function NonprofitView() {
               <button
                 onClick={handleFindMatches}
                 disabled={!goodsNeeded.trim()}
-                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium hover:shadow-lg"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md font-medium hover:shadow-lg"
               >
                 <Search className="w-5 h-5" />
                 Find Available
@@ -426,16 +426,16 @@ export default function NonprofitView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-              <h3 className="mb-2 text-amber-900 font-semibold">
+            <div className="mb-6 p-4 bg-[#F2FBF7] border border-[#4CAF8E] rounded-lg">
+              <h3 className="mb-2 text-[#1F7A63] font-semibold">
                 {matches.length > 0 ? "Available Sources" : "No Matches Found"}
               </h3>
               {matches.length > 0 ? (
-                <p className="text-sm text-teal-800">
+                <p className="text-sm text-[#1E293B]">
                   Found {matches.length} {matches.length === 1 ? "organization" : "organizations"} with available {goodsNeeded}
                 </p>
               ) : (
-                <p className="text-sm text-amber-800">
+                <p className="text-sm text-[#64748B]">
                   Try different items like "food", "electronics", "clothing", or "furniture".
                 </p>
               )}

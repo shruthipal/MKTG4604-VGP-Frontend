@@ -21,7 +21,7 @@ export default function Dashboard() {
     setOnboarded(true);
   };
   return (
-    <div className="min-h-screen bg-background" style={{ backgroundImage: 'var(--background-image)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: '25% auto', backgroundAttachment: 'fixed' }}>
+    <div className="min-h-screen bg-background" style={{ backgroundImage: 'var(--background-image)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: '40% auto', backgroundAttachment: 'fixed' }}>
       {!onboarded ? (
         <LandingPage onSelectRole={handleSelectRole} />
       ) : (
