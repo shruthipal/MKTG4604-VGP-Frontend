@@ -36,11 +36,11 @@ export default function Dashboard() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-700 to-teal-600 text-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-teal-600 to-teal-500 text-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
                     <Sparkles className="w-6 h-6" />
                   </div>
                   <div>
-                    <h1 className="mb-2 text-3xl font-bold text-emerald-900">Surplus Connect</h1>
+                    <h1 className="mb-2 text-3xl font-bold text-teal-900">Surplus Connect</h1>
                     <p className="text-gray-600 max-w-3xl">
                       Tell us what excess you have available, we will connect you with the best buyers based on your needs and Smart marketplace connecting business surplus with organizations in need. Simple, direct matching that creates real impact.
                     </p>
@@ -72,8 +72,8 @@ export default function Dashboard() {
                   onClick={() => setActiveTab("buyer")}
                   className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all font-medium ${
                     activeTab === "buyer"
-                      ? "bg-teal-600 text-white shadow-md"
-                      : "text-gray-600 hover:text-teal-600 hover:bg-white"
+                      ? "bg-amber-600 text-white shadow-md"
+                      : "text-gray-600 hover:text-amber-600 hover:bg-white"
                   }`}
                 >
                   <ShoppingCart className="w-4 h-4" />
