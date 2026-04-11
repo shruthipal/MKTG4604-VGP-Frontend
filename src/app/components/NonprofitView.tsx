@@ -46,16 +46,17 @@ export default function NonprofitView() {
 
     // Extract organization name
     const orgPatterns = [
-      /i'?m\s+(?:a\s+)?([a-zA-Z\s&]+?)(?:\s+and|,|\.|\s+how|\s+looking|$)/i,
-      /we'?re\s+(?:a\s+)?([a-zA-Z\s&]+?)(?:\s+and|,|\.|\s+how|\s+looking|$)/i,
-      /from\s+([a-zA-Z\s&]+?)(?:\s+and|,|\.|\s+how|\s+looking|$)/i,
+      /i'?m\s+(?:from\s+|representing\s+|with\s+)?([a-zA-Z\s&]+?)(?:\s+and|,|\.|\s+looking|\s+need|$)/i,
+      /we'?re\s+(?:from\s+|representing\s+|with\s+)?([a-zA-Z\s&]+?)(?:\s+and|,|\.|\s+looking|\s+need|$)/i,
+      /(?:from|at)\s+([a-zA-Z\s&]+?)(?:\s+and|,|\.|\s+looking|\s+need|$)/i,
+      /([a-zA-Z\s&]+?)\s+(?:needs|is looking|wants)/i,
     ];
 
     for (const pattern of orgPatterns) {
       const match = input.match(pattern);
       if (match && match[1]) {
         const extracted = match[1].trim();
-        if (extracted.length > 2 && !['food bank', 'nonprofit', 'reseller', 'buyer'].includes(extracted)) {
+        if (extracted.length > 2 && !['food', 'clothing', 'electronics', 'computers', 'laptops', 'food bank', 'nonprofit'].includes(extracted)) {
           setNonprofitName(extracted.charAt(0).toUpperCase() + extracted.slice(1));
           break;
         }
@@ -64,8 +65,9 @@ export default function NonprofitView() {
 
     // Extract quantity and goods needed
     const quantityPatterns = [
-      /(?:need|looking for|want)\s+(\d+[,\d]*)\s+([a-zA-Z\s]+?)(?:\s+per|daily|weekly|monthly|$)/i,
-      /(\d+[,\d]*)\s+([a-zA-Z\s]+?)(?:\s+needed|required)/i,
+      /(?:need|looking for|want|require)\s+(\d+[,\d]*)\s+([a-zA-Z\s]+?)(?:\s+per|daily|weekly|monthly|for|that|$)/i,
+      /(\d+[,\d]*)\s+([a-zA-Z\s]+?)(?:\s+needed|required|wanted)/i,
+      /(?:need|looking for|want)\s+(\d+[,\d]*)\s+([a-zA-Z\s]+?)(?:\s+to|for)/i,
     ];
 
     for (const pattern of quantityPatterns) {
@@ -82,8 +84,9 @@ export default function NonprofitView() {
     // If no quantity pattern matched, try to extract just the goods
     if (!goodsNeeded) {
       const goodsPatterns = [
-        /(?:need|looking for|want|get)\s+(?:some\s+)?(?:donated\s+)?([a-zA-Z\s,]+?)(?:\s+from|\?|$)/i,
-        /(?:for|buy|purchase)\s+([a-zA-Z\s,]+?)(?:\s+from|\?|$)/i,
+        /(?:need|looking for|want|require)\s+(?:some\s+|donated\s+)?([a-zA-Z\s,]+?)(?:\s+from|for|to|$)/i,
+        /(?:seeking|searching for)\s+([a-zA-Z\s,]+?)(?:\s+from|for|to|$)/i,
+        /(?:for|buy|purchase|get)\s+([a-zA-Z\s,]+?)(?:\s+from|for|to|$)/i,
       ];
 
       for (const pattern of goodsPatterns) {
@@ -98,10 +101,11 @@ export default function NonprofitView() {
       }
     }
 
-    // Extract location
+    // Extract location - improved patterns
     const locationPatterns = [
-      /(?:in|from|at|near)\s+([A-Z][a-zA-Z\s]+,\s*[A-Z]{2})/,
-      /(?:in|from|at|near)\s+([A-Z][a-zA-Z\s]+)/,
+      /(?:in|from|at|near|located in|based in|serving)\s+([A-Z][a-zA-Z\s]+,\s*[A-Z]{2})/,
+      /(?:in|from|at|near|located in|based in|serving)\s+([A-Z][a-zA-Z\s]+)/,
+      /([A-Z][a-zA-Z\s]+,\s*[A-Z]{2})\s+(?:area|region|community)/,
     ];
 
     for (const pattern of locationPatterns) {
@@ -112,11 +116,19 @@ export default function NonprofitView() {
       }
     }
 
-    // Extract budget
-    const budgetPattern = /(?:budget|pay|spend|up to)\s+\$(\d+[,\d]*(?:\.\d+)?[kKmM]?)/i;
-    const budgetMatch = chatInput.match(budgetPattern);
-    if (budgetMatch) {
-      setBudget('$' + budgetMatch[1]);
+    // Extract budget - improved patterns
+    const budgetPatterns = [
+      /(?:budget|can spend|have|up to)\s+\$?(\d+[,\d]*(?:\.\d+)?[kKmM]?)/i,
+      /\$(\d+[,\d]*(?:\.\d+)?[kKmM]?)\s+(?:budget|to spend|available)/i,
+      /(?:pay|spend)\s+(?:up to\s+)?\$?(\d+[,\d]*(?:\.\d+)?[kKmM]?)/i,
+    ];
+
+    for (const pattern of budgetPatterns) {
+      const match = chatInput.match(pattern);
+      if (match && match[1]) {
+        setBudget('$' + match[1]);
+        break;
+      }
     }
 
     setChatInput("");
@@ -203,9 +215,9 @@ export default function NonprofitView() {
           <div className="w-16 h-16 bg-[#E6F7F1] text-[#1F7A63] rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <ShoppingCart className="w-8 h-8" />
           </div>
-          <h2 className="mb-2 text-[#1E293B] text-2xl font-bold">I'm a Buyer</h2>
+          <h2 className="mb-2 text-[#1E293B] text-2xl font-bold">Find Available Surplus</h2>
           <p className="text-[#64748B] max-w-2xl mx-auto">
-            Tell us what you need and we'll connect you with the closest businesses that have that surplus available available
+            Search for businesses with surplus inventory that matches your organization's needs, either for free donations or paid purchases.
           </p>
         </div>
 
@@ -224,7 +236,7 @@ export default function NonprofitView() {
             <h3 className="text-[#1E293B] font-semibold">Quick Input</h3>
           </div>
           <p className="text-sm text-[#64748B] mb-3">
-            Describe what you need and we'll extract the details
+            Describe your organization's needs in natural language and we'll automatically fill in the form fields below
           </p>
           <div className="flex gap-2">
             <input

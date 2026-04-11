@@ -3,7 +3,7 @@
 :root {
   --font-size: 16px;
   --background: #F2FBF7;
-  --background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Ccircle cx='50' cy='50' r='20'/%3E%3Ccircle cx='150' cy='50' r='20'/%3E%3Cline x1='70' y1='50' x2='130' y2='50' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='4'/%3E%3C/g%3E%3C/svg%3E");
+  --background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cg fill='%231F7A63' fill-opacity='0.03'%3E%3Ccircle cx='50' cy='50' r='25'/%3E%3Ccircle cx='150' cy='50' r='25'/%3E%3Cline x1='75' y1='50' x2='125' y2='50' stroke='%231F7A63' stroke-opacity='0.03' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E");
   --foreground: #1E293B;
   --card: #FFFFFF;
   --card-foreground: #1E293B;
