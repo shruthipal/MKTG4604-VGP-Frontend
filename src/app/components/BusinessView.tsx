@@ -121,7 +121,6 @@ export default function BusinessView() {
     });
   };
 
-  // Clear results only — keep form filled so the user can search again
   const handleClearResults = () => {
     setMatches([]);
     setHasSearched(false);
@@ -133,7 +132,6 @@ export default function BusinessView() {
     <div className="max-w-4xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
 
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-emerald-100">
             <Building2 className="w-8 h-8" />
@@ -144,7 +142,6 @@ export default function BusinessView() {
           </p>
         </div>
 
-        {/* Example banner */}
         <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
           <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wide mb-1">Example</p>
           <p className="text-sm text-gray-700 italic">
@@ -152,7 +149,6 @@ export default function BusinessView() {
           </p>
         </div>
 
-        {/* Quick input */}
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-2">
             <MessageSquare className="w-4 h-4 text-emerald-600" />
@@ -178,7 +174,6 @@ export default function BusinessView() {
           </div>
         </div>
 
-        {/* Form */}
         <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
           <h3 className="text-base font-semibold text-gray-900 mb-5">Your Details</h3>
           <div className="space-y-4">
@@ -277,7 +272,6 @@ export default function BusinessView() {
           </div>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
             <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -288,10 +282,8 @@ export default function BusinessView() {
           </div>
         )}
 
-        {/* Results */}
         {hasSearched && !error && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            {/* Results header */}
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="font-semibold text-gray-900">

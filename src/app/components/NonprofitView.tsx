@@ -131,7 +131,6 @@ export default function NonprofitView() {
     });
   };
 
-  // Clear results only — form fields stay filled so the user can search again
   const handleClearResults = () => {
     setMatches([]);
     setHasSearched(false);
@@ -143,7 +142,6 @@ export default function NonprofitView() {
     <div className="max-w-4xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
 
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-emerald-100">
             <ShoppingCart className="w-8 h-8" />
@@ -154,7 +152,6 @@ export default function NonprofitView() {
           </p>
         </div>
 
-        {/* Example banner */}
         <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
           <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wide mb-1">Example</p>
           <p className="text-sm text-gray-700 italic">
@@ -162,7 +159,6 @@ export default function NonprofitView() {
           </p>
         </div>
 
-        {/* Quick input */}
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-2">
             <MessageSquare className="w-4 h-4 text-emerald-600" />
@@ -188,7 +184,6 @@ export default function NonprofitView() {
           </div>
         </div>
 
-        {/* Form */}
         <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
           <h3 className="text-base font-semibold text-gray-900 mb-5">Your Details</h3>
           <div className="space-y-4">
@@ -368,7 +363,6 @@ export default function NonprofitView() {
           </div>
         </div>
 
-        {/* Error */}
         {apiError && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
             <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -379,10 +373,8 @@ export default function NonprofitView() {
           </div>
         )}
 
-        {/* Results */}
         {hasSearched && !apiError && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            {/* Results header */}
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="font-semibold text-gray-900">
@@ -419,10 +411,8 @@ export default function NonprofitView() {
                     transition={{ duration: 0.3, delay: index * 0.07 }}
                     className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-emerald-300 hover:shadow-md transition-all shadow-sm"
                   >
-                    {/* Card body */}
                     <div className="p-5">
                       <div className="flex items-start justify-between gap-4">
-                        {/* Left: rank + title + tags */}
                         <div className="flex items-start gap-3 flex-1 min-w-0">
                           <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">
                             {index + 1}
@@ -440,7 +430,6 @@ export default function NonprofitView() {
                           </div>
                         </div>
 
-                        {/* Right: price + qty */}
                         <div className="text-right flex-shrink-0">
                           <div className="text-lg font-bold text-emerald-700 leading-tight">
                             {card.price === 0 ? "Free" : `$${card.price.toFixed(2)}`}
@@ -452,7 +441,6 @@ export default function NonprofitView() {
                         </div>
                       </div>
 
-                      {/* Match badge */}
                       <div className="mt-3">
                         <span className={`inline-flex items-center text-xs px-2.5 py-1 rounded-full font-semibold ${scoreBg}`}>
                           {scoreLabel} match
@@ -460,7 +448,6 @@ export default function NonprofitView() {
                       </div>
                     </div>
 
-                    {/* AI Recommendation toggle */}
                     <button
                       onClick={() => toggleCard(card.item_id)}
                       className="w-full flex items-center justify-between gap-2 px-5 py-3 text-sm text-emerald-700 hover:bg-emerald-50 transition-colors border-t border-gray-100 font-medium"
@@ -472,7 +459,6 @@ export default function NonprofitView() {
                       {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                     </button>
 
-                    {/* Expanded recommendation */}
                     <AnimatePresence>
                       {isExpanded && (
                         <motion.div
@@ -493,7 +479,6 @@ export default function NonprofitView() {
               })}
             </div>
 
-            {/* Search again prompt */}
             {matches.length > 0 && (
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-500">
