@@ -18,23 +18,19 @@ export default function LandingPage({ onSelectRole }: LandingPageProps) {
           <Sparkles className="w-8 h-8" />
         </div>
 
-        {/* Title */}
         <h1 className="mb-3 text-4xl font-bold text-[#1E293B]">Surplus Connect</h1>
 
-        {/* Tagline - Single line */}
         <p className="text-base text-[#64748B] font-medium leading-snug">
-            Tell us what excess you have available, we will connect you with the best buyers based on your needs. Simple. Easy. Direct. 
+          Tell us what excess you have available, we will connect you with the best buyers based on your needs. Simple. Easy. Direct.
         </p>
       </motion.div>
 
-      {/* Selection Cards */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         className="flex flex-col md:flex-row gap-4 w-full max-w-3xl"
       >
-        {/* Business Card */}
         <motion.button
           whileHover={{ scale: 1.05, y: -3 }}
           whileTap={{ scale: 0.98 }}
@@ -54,7 +50,6 @@ export default function LandingPage({ onSelectRole }: LandingPageProps) {
           </div>
         </motion.button>
 
-        {/* Buyer Card */}
         <motion.button
           whileHover={{ scale: 1.05, y: -3 }}
           whileTap={{ scale: 0.98 }}
