@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import {
-  ShoppingCart, MapPin, Package, Search,
-  DollarSign, Tag, Loader2, AlertCircle, ChevronDown, ChevronUp, Sparkles, UserPlus,
+  MapPin, Package, Search,
+  DollarSign, Tag, Loader2, AlertCircle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { fetchMatches, RecommendationCard } from "../lib/api";
-import RegisterBuyerModal from "./RegisterBuyerModal";
 
-export default function NonprofitView() {
+interface NonprofitViewProps {
+  onSelectItem?: (item: RecommendationCard) => void;
+}
+
+export default function NonprofitView({ onSelectItem }: NonprofitViewProps) {
   const [nonprofitName, setNonprofitName] = useState("");
   const [goodsNeeded, setGoodsNeeded] = useState("");
   const [location, setLocation] = useState("");
@@ -17,11 +20,9 @@ export default function NonprofitView() {
   const [hasSearched, setHasSearched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-  const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [isPurchasing, setIsPurchasing] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [showRegister, setShowRegister] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("nonprofitFormData");
@@ -49,7 +50,6 @@ export default function NonprofitView() {
     if (!goodsNeeded.trim() || isLoading) return;
     setIsLoading(true);
     setApiError(null);
-    setExpandedCards(new Set());
     try {
       const response = await fetchMatches({
         queryText: goodsNeeded,
@@ -71,47 +71,18 @@ export default function NonprofitView() {
     }
   };
 
-  const toggleCard = (itemId: string) => {
-    setExpandedCards((prev) => {
-      const next = new Set(prev);
-      if (next.has(itemId)) next.delete(itemId); else next.add(itemId);
-      return next;
-    });
-  };
-
   const handleClearResults = () => {
     setMatches([]);
     setHasSearched(false);
     setApiError(null);
-    setExpandedCards(new Set());
   };
 
   return (
     <>
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
 
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-emerald-100">
-            <ShoppingCart className="w-8 h-8" />
-          </div>
-          <h2 className="mb-2 text-gray-900 text-2xl font-bold">I'm a Buyer</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-sm leading-relaxed">
-            Tell us what you need and we'll connect you with the closest businesses that have that surplus available
-          </p>
-        </div>
-
-        <div className="flex justify-end mb-3">
-          <button
-            onClick={() => setShowRegister(true)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-emerald-300 transition-all text-sm text-gray-600 font-medium"
-          >
-            <UserPlus className="w-4 h-4 text-emerald-600" />
-            Register as a Buyer
-          </button>
-        </div>
-
-        <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 mb-6 shadow-sm">
           <h3 className="text-base font-semibold text-gray-900 mb-5">Your Details</h3>
           <div className="space-y-4">
             <div>
@@ -123,7 +94,7 @@ export default function NonprofitView() {
                 placeholder="e.g., Local Food Bank, Tech Resale"
                 value={nonprofitName}
                 onChange={(e) => setNonprofitName(e.target.value)}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
               />
             </div>
 
@@ -139,7 +110,7 @@ export default function NonprofitView() {
                   value={goodsNeeded}
                   onChange={(e) => setGoodsNeeded(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleFindMatches()}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
               <div>
@@ -151,7 +122,7 @@ export default function NonprofitView() {
                   placeholder="e.g., 200 daily, 500 units"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
             </div>
@@ -167,7 +138,7 @@ export default function NonprofitView() {
                   placeholder="e.g., Portland, OR"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
               <div>
@@ -259,7 +230,7 @@ export default function NonprofitView() {
                       placeholder="e.g., $5,000"
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                     />
                   </div>
                 </motion.div>
@@ -324,7 +295,6 @@ export default function NonprofitView() {
 
             <div className="space-y-3">
               {matches.map((card, index) => {
-                const isExpanded = expandedCards.has(card.item_id);
                 const score = card.composite_score;
                 const scoreLabel = score >= 0.75 ? "Strong" : score >= 0.5 ? "Good" : "Moderate";
                 const scoreBg =
@@ -338,7 +308,8 @@ export default function NonprofitView() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.07 }}
-                    className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-emerald-300 hover:shadow-md transition-all shadow-sm"
+                    onClick={() => onSelectItem?.(card)}
+                    className={`bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-emerald-300 hover:shadow-md transition-all shadow-sm ${onSelectItem ? "cursor-pointer" : ""}`}
                   >
                     <div className="p-5">
                       <div className="flex items-start justify-between gap-4">
@@ -377,32 +348,12 @@ export default function NonprofitView() {
                       </div>
                     </div>
 
-                    <button
-                      onClick={() => toggleCard(card.item_id)}
-                      className="w-full flex items-center justify-between gap-2 px-5 py-3 text-sm text-emerald-700 hover:bg-emerald-50 transition-colors border-t border-gray-100 font-medium"
-                    >
-                      <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        AI Recommendation
-                      </span>
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </button>
-
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-5 pb-5 pt-3 bg-emerald-50/60 border-t border-emerald-100">
-                            <p className="text-sm text-gray-700 leading-relaxed">{card.recommendation_text}</p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {onSelectItem && (
+                      <div className="px-5 py-3 border-t border-gray-100 bg-gray-50 flex items-center justify-between">
+                        <span className="text-xs text-gray-400">Click to view details & contact</span>
+                        <span className="text-xs font-semibold text-emerald-700">Express Interest →</span>
+                      </div>
+                    )}
                   </motion.div>
                 );
               })}
@@ -425,7 +376,6 @@ export default function NonprofitView() {
         )}
       </motion.div>
     </div>
-    {showRegister && <RegisterBuyerModal onClose={() => setShowRegister(false)} />}
     </>
   );
 }

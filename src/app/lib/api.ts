@@ -65,6 +65,8 @@ export interface RecommendationCard {
   similarity_score: number;
   composite_score: number;
   recommendation_text: string;
+  retailer_email?: string;
+  retailer_name?: string;
 }
 
 export interface MatchResponse {
@@ -222,6 +224,8 @@ export interface BuyerInterestCard {
   wants: string;
   preferences: string[];
   match_strength: "Strong" | "Good" | "Moderate";
+  contact_email?: string;
+  user_id?: string;
 }
 
 export interface BuyerSearchResponse {
@@ -339,4 +343,68 @@ export async function markAlertRead(retailerToken: string, alertId: string): Pro
     headers: { ...HEADERS, Authorization: `Bearer ${retailerToken}` },
   });
   if (!res.ok) throw new Error("Failed to mark alert as read");
+}
+
+// ── Interest / Inbox ──────────────────────────────────────────────────────────
+
+export interface InterestPayload {
+  from_org_name: string;
+  target_type: "item" | "buyer_profile";
+  target_id: string;
+  target_title: string;
+  target_owner_id: string;
+  message: string;
+}
+
+export interface InboxItem {
+  id: string;
+  from_user_id: string;
+  from_email: string;
+  from_org_name: string;
+  from_role: string;
+  target_type: string;
+  target_id: string;
+  target_title: string;
+  target_owner_id: string;
+  message: string;
+  is_read: number;
+  created_at: string;
+}
+
+export async function expressInterest(token: string, payload: InterestPayload): Promise<void> {
+  const res = await fetch(`${BASE_URL}/match/interest`, {
+    method: "POST",
+    headers: { ...HEADERS, Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to express interest");
+  }
+}
+
+export async function getInbox(token: string): Promise<InboxItem[]> {
+  const res = await fetch(`${BASE_URL}/match/inbox`, {
+    headers: { ...HEADERS, Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error("Failed to load inbox");
+  return res.json();
+}
+
+export async function markInterestRead(token: string, interestId: string): Promise<void> {
+  await fetch(`${BASE_URL}/match/inbox/${interestId}/read`, {
+    method: "PATCH",
+    headers: { ...HEADERS, Authorization: `Bearer ${token}` },
+  });
+}
+
+export async function getUserToken(email: string, password: string): Promise<{ token: string; role: string }> {
+  const res = await fetch(`${BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({ email, password }),
+  });
+  if (!res.ok) throw new Error("Invalid credentials");
+  const data = await res.json();
+  return { token: data.access_token, role: data.role };
 }

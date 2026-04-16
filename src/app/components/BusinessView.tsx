@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import {
   Building2, Package, DollarSign, Search,
   AlertCircle, MapPin, Loader2, Heart, Users, Briefcase, Tag,
-  Plus, Upload,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { searchInterestedBuyers, BuyerInterestCard } from "../lib/api";
-import AddItemModal from "./AddItemModal";
-import BulkUploadModal from "./BulkUploadModal";
-import RegisterBusinessModal from "./RegisterBusinessModal";
 
-export default function BusinessView() {
+interface BusinessViewProps {
+  onSelectBuyer?: (buyer: BuyerInterestCard) => void;
+}
+
+export default function BusinessView({ onSelectBuyer }: BusinessViewProps) {
   const [companyName, setCompanyName] = useState("");
   const [inventory, setInventory] = useState("");
   const [location, setLocation] = useState("");
@@ -20,9 +20,6 @@ export default function BusinessView() {
   const [hasSearched, setHasSearched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showAddItem, setShowAddItem] = useState(false);
-  const [showBulkUpload, setShowBulkUpload] = useState(false);
-  const [showRegisterBusiness, setShowRegisterBusiness] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("businessFormData");
@@ -68,30 +65,10 @@ export default function BusinessView() {
 
   return (
     <>
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
 
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-emerald-100">
-            <Building2 className="w-8 h-8" />
-          </div>
-          <h2 className="mb-2 text-gray-900 text-2xl font-bold">For Businesses</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-sm leading-relaxed">
-            Tell us what excess you have available — we'll connect you with the best buyers
-          </p>
-        </div>
-
-        <div className="flex justify-end mb-3">
-          <button
-            onClick={() => setShowRegisterBusiness(true)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-emerald-300 transition-all text-sm text-gray-600 font-medium"
-          >
-            <Building2 className="w-4 h-4 text-emerald-600" />
-            Register as a Business
-          </button>
-        </div>
-
-        <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 mb-6 shadow-sm">
           <h3 className="text-base font-semibold text-gray-900 mb-5">Your Details</h3>
           <div className="space-y-4">
             <div>
@@ -103,7 +80,7 @@ export default function BusinessView() {
                 placeholder="e.g., ABC Corp, Local Bakery"
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
               />
             </div>
 
@@ -119,7 +96,7 @@ export default function BusinessView() {
                   value={inventory}
                   onChange={(e) => setInventory(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleFindMatches()}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
               <div>
@@ -131,7 +108,7 @@ export default function BusinessView() {
                   placeholder="e.g., 500 daily, 1000 units"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
             </div>
@@ -147,7 +124,7 @@ export default function BusinessView() {
                   placeholder="e.g., Boston, MA"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
               <div>
@@ -160,7 +137,7 @@ export default function BusinessView() {
                   placeholder="e.g., $5,000"
                   value={estimatedValue}
                   onChange={(e) => setEstimatedValue(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent focus:bg-white transition-all"
                 />
               </div>
             </div>
@@ -187,22 +164,7 @@ export default function BusinessView() {
                   </button>
                 )}
               </div>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setShowAddItem(true)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-emerald-300 transition-all text-sm text-gray-600 font-medium"
-                >
-                  <Plus className="w-4 h-4 text-emerald-600" />
-                  Add Item
-                </button>
-                <button
-                  onClick={() => setShowBulkUpload(true)}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-emerald-300 transition-all text-sm text-gray-600 font-medium"
-                >
-                  <Upload className="w-4 h-4 text-emerald-600" />
-                  Bulk Upload
-                </button>
-              </div>
+
             </div>
           </div>
         </div>
@@ -259,43 +221,53 @@ export default function BusinessView() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
-                    className="bg-white border border-gray-200 rounded-2xl p-5 hover:border-emerald-300 hover:shadow-md transition-all shadow-sm"
+                    onClick={() => onSelectBuyer?.(buyer)}
+                    className={`bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-emerald-300 hover:shadow-md transition-all shadow-sm ${onSelectBuyer ? "cursor-pointer" : ""}`}
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-3 flex-1 min-w-0">
-                        <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                          {index + 1}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-gray-900 text-sm leading-snug">{buyer.org_name}</h4>
-                          <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
-                            <span className={`text-xs px-2 py-0.5 rounded-full border font-medium flex items-center gap-1 ${segmentConfig.bg}`}>
-                              <Icon className="w-3 h-3" />
-                              {segmentConfig.label}
-                            </span>
-                            {buyer.location && (
-                              <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full flex items-center gap-1">
-                                <MapPin className="w-3 h-3" />
-                                {buyer.location}
+                    <div className="p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-3 flex-1 min-w-0">
+                          <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                            {index + 1}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-semibold text-gray-900 text-sm leading-snug">{buyer.org_name}</h4>
+                            <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                              <span className={`text-xs px-2 py-0.5 rounded-full border font-medium flex items-center gap-1 ${segmentConfig.bg}`}>
+                                <Icon className="w-3 h-3" />
+                                {segmentConfig.label}
                               </span>
-                            )}
+                              {buyer.location && (
+                                <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full flex items-center gap-1">
+                                  <MapPin className="w-3 h-3" />
+                                  {buyer.location}
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
+                        <span className={`text-xs px-2.5 py-1 rounded-full font-semibold flex-shrink-0 ${strengthBg}`}>
+                          {buyer.match_strength} match
+                        </span>
                       </div>
-                      <span className={`text-xs px-2.5 py-1 rounded-full font-semibold flex-shrink-0 ${strengthBg}`}>
-                        {buyer.match_strength} match
-                      </span>
+
+                      <p className="mt-3 text-sm text-gray-600 leading-relaxed">{buyer.wants}</p>
+
+                      {buyer.preferences.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {buyer.preferences.map((pref) => (
+                            <span key={pref} className="text-xs px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-100">
+                              {pref}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
-                    <p className="mt-3 text-sm text-gray-600 leading-relaxed">{buyer.wants}</p>
-
-                    {buyer.preferences.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {buyer.preferences.map((pref) => (
-                          <span key={pref} className="text-xs px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-100">
-                            {pref}
-                          </span>
-                        ))}
+                    {onSelectBuyer && (
+                      <div className="px-5 py-3 border-t border-gray-100 bg-gray-50 flex items-center justify-between">
+                        <span className="text-xs text-gray-400">Click to view details & contact</span>
+                        <span className="text-xs font-semibold text-emerald-700">Express Interest →</span>
                       </div>
                     )}
                   </motion.div>
@@ -320,9 +292,6 @@ export default function BusinessView() {
         )}
       </motion.div>
     </div>
-    {showAddItem && <AddItemModal onClose={() => setShowAddItem(false)} />}
-    {showBulkUpload && <BulkUploadModal onClose={() => setShowBulkUpload(false)} />}
-    {showRegisterBusiness && <RegisterBusinessModal onClose={() => setShowRegisterBusiness(false)} />}
     </>
   );
 }
